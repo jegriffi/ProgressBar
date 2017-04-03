@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GoalProgressBar">
+        <attr name="progressBarHeight" format="dimension"/>
+        <attr name="goalIndicatorThickness" format="dimension"/>
+        <attr name="goalReachedColor" format="color"/>
+        <attr name="firstColor" format="color" />
+        <attr name="secondColor" format="color" />
+        <attr name="thirdColor" format="color" />
+        <attr name="fourthColor" format="color" />
+        <attr name="errorColor" format="color" />
+        <attr name="goalNotReachedColor" format="color"/>
+        <attr name="unfilledSectionColor" format="color"/>
+        <attr name="barThickness" format="dimension"/>
+    </declare-styleable>
+
+</resources>

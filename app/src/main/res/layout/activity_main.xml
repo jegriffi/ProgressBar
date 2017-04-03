@@ -1,26 +1,108 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center|top"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:paddingTop="50dp">
 
-    <com.codepath.customprogressbar.GoalProgressBar
+    <com.codepath.customprogressbar.Widget.GoalProgressBar
         android:id="@+id/progressBar"
-        style="?android:progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminate="false"/>
+        app:progressBarHeight="3dp"
+        app:firstColor="@color/color_1"
+        app:secondColor="@color/color_2"
+        app:thirdColor="@color/color_3"
+        app:fourthColor="@color/color_4"
+        app:errorColor="@color/error_color"
+        app:unfilledSectionColor="@color/gray"
+        app:barThickness="25dp"/>
 
-    <Button
-        android:id="@+id/resetProgressBtn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="16dp"
-        android:text="@string/reset_progress"/>
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight=".7"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/prevProgressBtn"
+                android:layout_width="0dp"
+                android:layout_weight=".3"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:text="BACK"/>
+
+            <Button
+                android:id="@+id/halfStepProgress"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_marginEnd="10dp"
+                android:layout_height="match_parent"
+                android:text="HALF\nNEXT"/>
+
+            <Button
+                android:id="@+id/nextProgressBtn"
+                android:layout_width="0dp"
+                android:layout_weight=".3"
+                android:layout_marginEnd="15dp"
+                android:layout_height="match_parent"
+                android:text="NEXT"/>
+        </LinearLayout>
+
+        <Switch
+            android:id="@+id/isError"
+            android:paddingStart="15dp"
+            android:text="Is Error"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:layout_marginBottom="10dp">
+
+            <EditText
+                android:id="@+id/editText"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/updateFieldSize"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Update"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
 
 </LinearLayout>
