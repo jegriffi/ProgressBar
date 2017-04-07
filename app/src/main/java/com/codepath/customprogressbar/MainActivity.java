@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setProgress(GoalProgressBar.ProgressState.HALF_FORWARD);
     }
 
+    @OnClick(R.id.halfStepBackProgress)
+    public void halfBackProgress() {
+        progressBar.setProgress(GoalProgressBar.ProgressState.HALF_BACKWARDS);
+    }
+
     @OnClick(R.id.updateFieldSize)
     public void setFieldNumberDynamically() {
         String text = editText.getText().toString();

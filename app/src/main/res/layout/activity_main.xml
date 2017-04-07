@@ -41,13 +41,24 @@
                 android:layout_weight=".3"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
+                android:textSize="8sp"
                 android:text="BACK"/>
+
+            <Button
+                android:id="@+id/halfStepBackProgress"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_marginEnd="10dp"
+                android:textSize="8sp"
+                android:layout_height="match_parent"
+                android:text="HALF\nBACK"/>
 
             <Button
                 android:id="@+id/halfStepProgress"
                 android:layout_width="0dp"
                 android:layout_weight="0.3"
                 android:layout_marginEnd="10dp"
+                android:textSize="8sp"
                 android:layout_height="match_parent"
                 android:text="HALF\nNEXT"/>
 
@@ -56,6 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_weight=".3"
                 android:layout_marginEnd="15dp"
+                android:textSize="8sp"
                 android:layout_height="match_parent"
                 android:text="NEXT"/>
         </LinearLayout>
