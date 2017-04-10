@@ -77,6 +77,7 @@ public class GoalProgressBar extends View {
         // arbitrary max number to keep the range within nice working numbers
         if (numOfFields > 0 && numOfFields < 30) {
             this.numOfFields = numOfFields;
+            currentFieldPosition = 1;
             progressDiff = 100 / numOfFields;
             double newProgress = currentFieldPosition / numOfFields * 100;
             previousProgressEndX = (int) (getWidth() * newProgress / 100f);
@@ -163,24 +164,30 @@ public class GoalProgressBar extends View {
     public void setProgress(ProgressState state) {
         if (!isRunning) {
             if (state == ProgressState.BACKWARDS) {
-                if ((progress - progressDiff) > 0) {
+                if ((progress - progressDiff) > 0
+                        && (currentFieldPosition - 1) >= 1) {
                     progress -= progressDiff;
                     currentFieldPosition -= 1;
-                } else if ((progress - (progressDiff / 2) > 0)) {
+                } else if ((progress - (progressDiff / 2) > 0
+                        && (currentFieldPosition - 0.5) >= 1)) {
                     progress -= (progressDiff / 2);
                     currentFieldPosition -= 0.5;
                 }
                 setInBackwardsState(true);
             } else if(state == ProgressState.HALF_BACKWARDS) {
-                if ((progress - (progressDiff / 2)) > 0) {
+                if ((progress - (progressDiff / 2)) > 0
+                        && (currentFieldPosition - 0.5) >= 1) {
                     progress -= (progressDiff / 2);
                     currentFieldPosition -= 0.5;
                     setInBackwardsState(true);
                 }
             } else if (state == ProgressState.FORWARD) {
-                if ((progress + progressDiff) <= 100) {
+                if ((progress + progressDiff) < 100) {
                     progress += progressDiff;
                     currentFieldPosition += 1;
+                } else if (progress + progressDiff >= 100) {
+                    progress = 100;
+                    currentFieldPosition = numOfFields;
                 } else if ((progress + (progressDiff / 2)) <= 100) {
                     progress += (progressDiff / 2);
                     currentFieldPosition += 0.5;
@@ -193,7 +200,7 @@ public class GoalProgressBar extends View {
                     setInBackwardsState(false);
                 }
             }
-            setProgress(progress, true);
+            setProgress(completeProgressIfNecessary(state, progress), true);
         }
     }
 
@@ -266,6 +273,25 @@ public class GoalProgressBar extends View {
     }
 
     /**
+     * Sometimes due to loss of precision the progress won't reach a full 100% so
+     * this will just complete the entire progress so you won't see a portion incomplete
+     * @param state
+     * @param oldProgress
+     * @return
+     */
+    private int completeProgressIfNecessary(ProgressState state, int oldProgress) {
+        if (state == ProgressState.HALF_FORWARD || state == ProgressState.FORWARD) {
+            if (oldProgress > (100 - progressDiff / 2)) {
+                return 100;
+            }
+            if (oldProgress >= 100) {
+                return 100;
+            }
+        }
+        return oldProgress;
+    }
+
+    /**
      * This is for the overlay on the custom EditText - place in lieu of the
      * default underline
      *
@@ -305,16 +331,6 @@ public class GoalProgressBar extends View {
 
     public void setBarThickness(int barThickness) {
         this.barThickness = barThickness;
-        postInvalidate();
-    }
-
-    /**
-     * updates the progressbar to the new number of fields then adjusts
-     * the user's progress
-     * @param numOfFields
-     */
-    public void changeNumOfFields(int numOfFields) {
-        this.numOfFields = numOfFields;
         postInvalidate();
     }
 
