@@ -54,7 +54,7 @@ public class GoalProgressBar extends View {
         isErrorState = false;
         isInBackwardsState = false;
         isRunning = false;
-        currentFieldPosition = 1;
+        currentFieldPosition = 0;
 
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.GoalProgressBar, 0, 0);
         try {
@@ -77,7 +77,7 @@ public class GoalProgressBar extends View {
         // arbitrary max number to keep the range within nice working numbers
         if (numOfFields > 0 && numOfFields < 30) {
             this.numOfFields = numOfFields;
-            currentFieldPosition = 1;
+            currentFieldPosition = 0;
             progressDiff = 100 / numOfFields;
             double newProgress = currentFieldPosition / numOfFields * 100;
             previousProgressEndX = (int) (getWidth() * newProgress / 100f);
@@ -164,8 +164,8 @@ public class GoalProgressBar extends View {
     public void setProgress(ProgressState state) {
         if (!isRunning) {
             if (state == ProgressState.BACKWARDS) {
-                if ((progress - progressDiff) > 0
-                        && (currentFieldPosition - 1) >= 1) {
+                if ((progress - progressDiff) >= 0
+                        && (currentFieldPosition - 1) >= 0) {
                     progress -= progressDiff;
                     currentFieldPosition -= 1;
                 } else if ((progress - (progressDiff / 2) > 0
@@ -175,8 +175,8 @@ public class GoalProgressBar extends View {
                 }
                 setInBackwardsState(true);
             } else if(state == ProgressState.HALF_BACKWARDS) {
-                if ((progress - (progressDiff / 2)) > 0
-                        && (currentFieldPosition - 0.5) >= 1) {
+                if ((progress - (progressDiff / 2)) >= 0
+                        && (currentFieldPosition - 0.5) >= 0) {
                     progress -= (progressDiff / 2);
                     currentFieldPosition -= 0.5;
                     setInBackwardsState(true);
