@@ -169,7 +169,7 @@ public class GoalProgressBar extends View {
                     progress -= progressDiff;
                     currentFieldPosition -= 1;
                 } else if ((progress - (progressDiff / 2) > 0
-                        && (currentFieldPosition - 0.5) >= 1)) {
+                        && (currentFieldPosition - 0.5) >= 0)) {
                     progress -= (progressDiff / 2);
                     currentFieldPosition -= 0.5;
                 }
